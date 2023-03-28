@@ -10,7 +10,6 @@ int main(int argc, char *argv[]) {
     char *buffer; // load the whole file in an array of characters
     int count[4]={0}; // the final combined array of 4 arrays to store frequency of each character for each thread
     int max_count = 0; // maximum frequency of the character
-    int tmp_count; // temporary maximum frequency
     char max_char; // character with maximum frequency
 
     // ============================================================================================================
@@ -118,7 +117,7 @@ int main(int argc, char *argv[]) {
             }
 
             // Combine arrays for each thread in to one
-            #pragma critical
+            #pragma omp critical
             {
                 for (int i = 0; i < 4; i++) {
                     count[i] += count_local[i];
